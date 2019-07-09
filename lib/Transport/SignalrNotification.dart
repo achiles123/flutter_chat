@@ -1,3 +1,5 @@
+import 'package:chat/Models/Chat.dart';
+import 'package:chat/main.dart';
 import 'package:signalr_client/signalr_client.dart';
 
 class SignalrNotification{
@@ -36,4 +38,16 @@ class SignalrNotification{
     onNotification(data);
   }
 
+  void sendMessage(String roomId,String message){
+    _hubConnection.invoke("SendMessage",args: [
+      new Chat(
+        roomId:roomId,
+        userId:userId,
+        userName:userName,
+        message:message,
+        messageType:1,
+        dateCreate:DateTime.now()
+      )
+    ]);
+  }
 }

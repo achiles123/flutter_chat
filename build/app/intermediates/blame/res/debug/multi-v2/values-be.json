@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\project\\flutter\\chat\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-be\\values-be.xml",
+            "outputFile": "D:\\project\\flutter\\flutter_chat\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-be\\values-be.xml",
             "map": [
                 {
                     "source": "C:\\Users\\HN\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.1.aar\\15fa4b8c60fd8d0339d244e72bb5ed38\\res\\values-be\\values-be.xml",

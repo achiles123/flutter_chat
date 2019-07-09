@@ -1,9 +1,12 @@
 import 'package:chat/Models/Chat.dart';
+import 'package:chat/Transport/SignalrNotification.dart';
 import 'package:flutter/material.dart';
 import 'package:chat/Transport/ChatNotify.dart';
 import 'package:intl/intl.dart';
 
-String userId= "5d1cca30c995cd0aaec797e6";
+String userId = "5d1cca30c995cd0aaec797e6";
+String userName = "Rey";
+String roomId = "none";
 
 void main() => runApp(MyApp());
 
@@ -33,12 +36,20 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _txtMessage;
   List<Chat> _listChat;
   ChatNotify _chat;
+  SignalrNotification _signal;
 
   @override
   void initState() {
     super.initState();
     _txtMessage = new TextEditingController();
     _listChat = new List<Chat>();
+    _signal = new SignalrNotification();
+    _signal.init();
+    _signal.onMessage = (List<Object> msg){
+      setState(() {
+       _listChat.add((msg[0] as Chat));
+      });
+    };
     _chat = new ChatNotify();
     _chat.setup();
   }
@@ -59,6 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     child: ListView.builder(
                       itemBuilder: (context,index){
+                        if(_listChat.length == 0)
+                          return Container(
+                            height: 10,
+                          );
                         if(_listChat[index].userId != userId){
                           return Container(
                             child: Column(
@@ -118,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Container(
                         child: RaisedButton(
                           onPressed: (){
-                            
+                            _signal.sendMessage(roomId, _txtMessage.text);
                           },
                           child:Icon(Icons.send)
                         ),
