@@ -3,7 +3,7 @@ import 'package:chat/main.dart';
 import 'package:signalr_client/signalr_client.dart';
 
 class SignalrNotification{
-  static String _serverUrl = "http://192.168.1.132:6969/notification";
+  static String _serverUrl = "http://192.168.1.5:6969/notification";
   HubConnection _hubConnection ;
   Function onMessage;
   Function onNotification;
@@ -39,7 +39,10 @@ class SignalrNotification{
   }
 
   void sendMessage(String roomId,String message){
-    _hubConnection.invoke("SendMessage",args: [
+    if (_hubConnection.state != HubConnectionState.Connected) {
+       _hubConnection.start();
+    }
+    _hubConnection.invoke("SendMessage",args: <Object>[
       new Chat(
         roomId:roomId,
         userId:userId,
