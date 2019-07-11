@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chat/Models/Chat.dart';
 import 'package:chat/main.dart';
 import 'package:signalr_client/signalr_client.dart';
@@ -30,7 +32,7 @@ class SignalrNotification{
 
   void _handleIncommingChatMessage(List<Object> args){
     List<dynamic> data = args[0];
-    onMessage(data);
+    onMessage(Chat.parseJson(data[0]));
   }
 
   void _handleNotification(List<Object> args){
@@ -43,14 +45,14 @@ class SignalrNotification{
        _hubConnection.start();
     }
     _hubConnection.invoke("SendMessage",args: <Object>[
-      new Chat(
+      json.encode( Chat(
         roomId:roomId,
         userId:userId,
         userName:userName,
         message:message,
         messageType:1,
         dateCreate:DateTime.now()
-      )
+      ))
     ]);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:chat/Models/Chat.dart';
 import 'package:chat/Transport/SignalrNotification.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chat/Transport/ChatNotify.dart';
 import 'package:intl/intl.dart';
@@ -45,9 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
     _listChat = new List<Chat>();
     _signal = new SignalrNotification();
     _signal.init();
-    _signal.onMessage = (List<Object> msg){
+    _signal.onMessage = (dynamic msg){
       setState(() {
-       _listChat.add((msg[0] as Chat));
+       _listChat.add(msg);
       });
     };
     _chat = new ChatNotify();
@@ -69,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   child: Container(
                     child: ListView.builder(
+                      itemCount:  _listChat.length,
                       itemBuilder: (context,index){
                         if(_listChat.length == 0)
                           return Container(
@@ -94,14 +96,19 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           );
                         }else{
-                          return Container(
+                          return  Container(
+                            width: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              color: Color(0xffcce6ff)
+                            ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    Text(formatDate.format(DateTime.now())),
+                                    Text(formatDate.format(_listChat[index].dateCreate)),
                                   ],
                                 ),
                                 Row(
