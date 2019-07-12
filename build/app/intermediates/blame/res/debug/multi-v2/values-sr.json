@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\project\\flutter\\flutter_chat\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sr\\values-sr.xml",
+            "outputFile": "C:\\Users\\bsd\\Desktop\\flutter_chat\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sr\\values-sr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\HN\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.1.aar\\15fa4b8c60fd8d0339d244e72bb5ed38\\res\\values-sr\\values-sr.xml",
+                    "source": "C:\\Users\\bsd\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.1.aar\\f4a74c2874506259310b04b35b4672cf\\res\\values-sr\\values-sr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
